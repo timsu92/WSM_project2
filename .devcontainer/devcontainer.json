@@ -1,0 +1,65 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+  "name": "wsm project 2",
+  // ## Base image ##
+  // Use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  // "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  // "dockerComposeFile": "docker-compose.devcontainer.yml",
+  // "service": "dengta_backend",
+  // "runServices": [],
+  "overrideCommand": true,
+
+  // ## Environment ##
+  "workspaceFolder": "/workspace/${localWorkspaceFolderBasename}",
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace/${localWorkspaceFolderBasename},type=bind,consistency=cached"
+  ],
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+      "packages": "bash,vim,curl,git",
+      "upgradePackages": true
+    }
+    // "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "runArgs": [
+    "--gpus",
+    "all",
+  // "device=1",
+  // "--shm-size=13gb",
+  // "--init"
+  ],
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [3001],
+  // "portsAttributes": {
+  //   "3001": {
+  //     "label": "dengta_backend",
+  //     "requireLocalPort": true
+  //   }
+  // },
+  // "privileged": true,
+
+  // ## Custom commands in different stages ##
+  // "onCreateCommand": "",
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "cd ${containerWorkspaceFolder} && npm install --legacy-peer-deps",
+  // "postStartCommand": "",
+  // "postAttachCommand": {
+    // "port forwarding": "service socat start"
+  // },
+
+  // ## Tool-specific properties ##
+  "customizations": {
+    "vscode": {
+      "extensions": []
+    }
+  }
+
+  // ## User in the container. More info: https://aka.ms/dev-containers-non-root. ##
+  // "remoteUser": "node"
+}
+
