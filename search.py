@@ -1,7 +1,7 @@
 import argparse
 
 from pyserini.search.lucene import LuceneSearcher
-from pyserini.index import LuceneIndexReader
+# from pyserini.index import LuceneIndexReader
 
 from proj2_sample_run.sparse_retrieval.codes.util import read_title_desc
 from proj2_sample_run.sparse_retrieval.codes.search import search
@@ -23,8 +23,9 @@ if args.method == "bm25":
     searcher.set_bm25(k1=2, b=0.75)
 elif args.method == "MLE_laplace":  # laplace smoothing
     searcher = LuceneSearcher(args.index, prebuilt_index_name="WT2G")
-    index_reader = LuceneIndexReader(args.index)
-    searcher.set_qld(index_reader.stats()["unique_terms"])
+    # index_reader = LuceneIndexReader(args.index)
+    # searcher.set_qld(index_reader.stats()["unique_terms"])
+    searcher.set_qld(1000)
 elif args.method == "LM_JM":
     searcher = LMJelinekMercerSmoothing(index_dir=args.index, prebuilt_index_name="WT2G")
 

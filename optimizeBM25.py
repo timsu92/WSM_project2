@@ -12,12 +12,9 @@ from tqdm import tqdm
 from proj2_sample_run.sparse_retrieval.codes.util import read_title_desc
 from proj2_sample_run.sparse_retrieval.codes.search import search
 
-def evaluate_bm25_params(index, query_path, k1, b, output, args):
-    searcher = LuceneSearcher(index, "WT2G")
-    searcher.set_bm25(k1=k1, b=b)
-
+def evaluate_bm25_params(searcher, query_path, output, args):
     query = read_title_desc(query_path)
-    search(searcher, query, argparse.Namespace(**args.__dict__, output=output, method="bm25"))
+    search(searcher, query, output, "bm25", args.k)
 
     result = subprocess.run(
         ['perl', 'proj2_sample_run/sparse_retrieval/trec_eval.pl',
@@ -75,7 +72,9 @@ def main():
     for i, (k1, b) in tqdm(enumerate(itertools.product(k1_values, b_values))):
         output = os.path.join(args.output_dir, f'bm25_k1_{k1}_b_{b}.run')
 
-        scores = evaluate_bm25_params(args.index, args.query, k1, b, output, args)
+        searcher = LuceneSearcher(args.index, "WT2G")
+        searcher.set_bm25(k1=k1, b=b)
+        scores = evaluate_bm25_params(searcher, args.query, output, args)
         weighted_score = scores[0] / 45 \
                         + scores[1] / 4 \
                         + scores[2] / 0.7 \
