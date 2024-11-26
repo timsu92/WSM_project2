@@ -17,4 +17,4 @@ if __name__ == '__main__':
         searcher.set_bm25(k1=2, b=0.75)
 
     query = read_desc(args.query)
-    search(searcher, query, args)
+    search(searcher, query, args.output, args.method, args.k)
