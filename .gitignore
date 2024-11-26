@@ -3,6 +3,8 @@ __pycache__
 
 /indexes/collection/*
 !/indexes/collection/.gitkeep
+/indexes/nostem_collection/*
+!/indexes/nostem_collection/.gitkeep
 /tfboard_logs
 WT2G
 /proj2_sample_run/sparse_retrieval/indexes/collection/*
