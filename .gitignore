@@ -11,5 +11,5 @@ WT2G
 !/proj2_sample_run/sparse_retrieval/indexes/collection/.gitkeep
 /proj2_sample_run/sparse_retrieval/runs/*
 !/proj2_sample_run/sparse_retrieval/runs/.gitkeep
-/runs/*
+/runs/bm25_params
 !/runs/bm25_params/.gitkeep
